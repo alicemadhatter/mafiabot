@@ -23,16 +23,17 @@ async def main(name, password, rucaptcha_api):
                 print("mail", mailcheck)
                 if "Старт" in mailcheck['messages'][0]['text']:
                     mailsend = await mpets.post_send("Добро пожаловать! Я помогаю проводить Мафию в режиме "
-                                                     "\"как в разрушителях\". Отправьте слово \"ИГРА\", "
+                                                     "«как в разрушителях». Отправьте слово «ИГРА», "
                                                      "чтобы начать (обязательно КАПСОМ) " + ":]" * random.randint(1,10), mail.pet_id)
                 if "ИГРА" in mailcheck['messages'][0]['text']:
                     mailsend = await mpets.post_send("Напишите названия ролей и их количество в игре. "
-                                                     "В начале напишите \"СПИСОК РОЛЕЙ\", так я пойму, что Вы добавляете "
-                                                     "роли в игру! " + ":-)" * random.randint(1, 10), mail.pet_id)
+                                                     "Формат: название роли:количество человек на роли. "
+                                                     "Укажите в начале «СПИСОК РОЛЕЙ», чтобы я понял, что Вы хотите добавить "
+                                                     "роли!" + ":-)" * random.randint(1, 10), mail.pet_id)
                 if "СПИСОК РОЛЕЙ" in mailcheck['messages'][0]['text']:
                     temp = mailcheck['messages'][0]['text']
                     temp = temp.split("\n")[1:]
-                    text = "Обнаружены следующие роли:\n"
+                    text = "Итак, вот список ролей по номерам:\n"
                     counter = 1
                     tmp = []
                     for i in temp:
